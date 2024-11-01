@@ -1,0 +1,47 @@
+package org.hjh.project_todo.repository;
+
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
+import org.hjh.project_todo.domain.Todo;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.stream.IntStream;
+
+@SpringBootTest
+@Log4j2
+public class TodoRepositoryTest {
+    @Autowired
+    private TodoRepository todoRepository;
+    @Test
+    public void testInsert() {
+        IntStream.rangeClosed(1, 100).forEach(i -> {
+            Todo todo = Todo.builder()
+                    .title("Title" + i)
+                    .member_id("sample member")
+                    .description("Description" + i)
+                    .complete(false)
+                    .due_date(LocalDateTime.now())
+                    .build();
+
+            Todo result = todoRepository.save(todo);
+            log.info("TodoId" + result.getTodo_id());
+        });
+
+
+    }
+
+    @Test
+    public void testSelect() {
+        Long todoId = 100L;
+
+        Optional<Todo> result = todoRepository.findById(todoId);
+
+        Todo todo = result.orElseThrow();
+
+        log.info(todo);
+    }
+}
