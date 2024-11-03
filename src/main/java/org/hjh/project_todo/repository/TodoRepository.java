@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface TodoRepository extends JpaRepository<Todo,Long> {
 
-    @Query("select  b from Todo b where b.title like concat('%', :keyword,'%') order by b.todo_id desc")
-    Page<Todo> searchAll(String keyword,Pageable pageable);
+
+
 }

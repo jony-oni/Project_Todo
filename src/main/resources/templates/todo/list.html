@@ -12,7 +12,12 @@
     <div class="card-body">
 
       <h5 class="card-title" >username님의 모든 일정입니다.</h5>
-      <a href="#" class="btn btn-outline-secondary">일정 등록 </a>
+    <div>
+      <a th:href="|@{/todo/register}|" class="text-decoration-none">
+        <button type="submit" class="btn btn-outline-secondary">일정 등록</button>
+      </a>
+    </div>
+      <!--<a href="#" class="btn btn-outline-secondary">일정 등록 </a>-->
 
       <table class="table">
 
@@ -27,13 +32,12 @@
         </thead>
 
         <tbody>
-        <tr th:each="dto:${responseDTO.dtoList}">
+        <tr th:each="dto:${todoList}">
           <th scope="row">[[${dto.todo_id}]]</th>
-          <td>[[${dto.title}]]</td>
+          <td><a th:href="@{/todo/read(todo_id=${dto.todo_id})}">[[${dto.title}]]</a></td>
           <td>[[${dto.description}]]</td>
           <td>[[${dto.complete}]]</td>
           <td>[[${#temporals.format(dto.due_date,'yyyy-MM-dd')}]]</td>
-
         </tr>
       </table>
 

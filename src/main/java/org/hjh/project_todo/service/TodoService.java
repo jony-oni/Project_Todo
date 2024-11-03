@@ -5,10 +5,14 @@ import org.hjh.project_todo.dto.PageRequestDTO;
 import org.hjh.project_todo.dto.PageResponseDTO;
 import org.hjh.project_todo.dto.TodoDTO;
 
+import java.util.List;
+
 public interface TodoService {
-    Long register(TodoDTO todoDTO);
-    TodoDTO readOne(Long todo_id);
-    void modify(TodoDTO todoDTO);
-    void remove(Long todo_id);
-    PageResponseDTO<TodoDTO> list(PageRequestDTO pageRequestDTO);
+
+    List<Todo> getList();
+    //PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+    Todo getTodo(Long todo_id);
+    void saveTodo(Todo todo);
+    void updateTodo(Todo todo);
+    void deleteTodo(Long todo_id);
 }

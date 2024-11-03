@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Read Page</h5>
+
+      <!--<form action="/todo/register" method="post">-->
+        <div class="input-group mb-3">
+         <span class="input-group-text">Todo_id</span>
+          <input type="text" name="todo_id" class="form-control" th:value="${dto.todo_id}" readonly>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Title</span>
+          <input type="text" name="title" class="form-control"th:value="${dto.title}" readonly>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Description</span>
+          <textarea name="description" class="form-control col-sm-5" rows="5" readonly>[[${dto.description}]]</textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Complete</span>
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:value="${dto.complete}" readonly>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">DueDate</span>
+          <input type="date" name="due_date" class="form-control" th:value="${dto.due_date}" readonly>          <
+        </div>
+
+        <!--<div class="input-group mb-3">
+        <a th:href="|@{/todo/modify(todo_id=${dto.todo_id})}|" class="text-decoration-none">
+          <button type="button" class="btn btn-primary">Modify</button>
+        </a>
+        <a th:href="|@{/todo/list}|" class="text-decoration-none">
+          <button type="reset" class="btn btn-secondary">List</button>
+        </a>
+      </div>-->
+      <div class="input-group mb-3">
+        <a th:href="@{/todo/modify(todo_id=${dto.todo_id})}" class="btn btn-primary">Modify</a>
+        <a th:href="@{/todo/list}" class="btn btn-secondary">List</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</html>

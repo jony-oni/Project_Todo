@@ -18,6 +18,7 @@ import java.net.URLEncoder;
 public class PageRequestDTO {
     @Builder.Default
     private int page = 1;
+
     @Builder.Default
     private int size = 7;
 

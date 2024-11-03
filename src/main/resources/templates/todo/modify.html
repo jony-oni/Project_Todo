@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
+
+
+<div layout:fragment="content">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Modify Page</h5>
+
+      <form action="/todo/modify" method="post">
+        <input type="hidden" name="todo_id" th:value="${dto.todo_id}">
+
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Title</span>
+          <input type="text" name="title" class="form-control" th:value="${dto.title}">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Description</span>
+          <textarea name="description" class="form-control col-sm-5" rows="5">[[${dto.description}]]</textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">Complete</span>
+          <input class="form-check-input" type="checkbox"  id="flexCheckDefault" th:value="${dto.content}">
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text">DueDate</span>
+          <input type="date" name="due_date" class="form-control" th:value="${dto.duedate}">
+        </div>
+
+        <div class="input-group mb-3">
+          <button type="button" id="modifyBtn" class="btn btn-primary">Modify</button>
+          <button type="button" id="removeBtn" class="btn btn-danger">Remove</button>
+          <button type="button" id="listBtn" class="btn btn-secondary">List</button>
+        </div>-->
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<script layout:fragment="script" th:inline="javascript">
+  const formObj=document.querySelector("form");
+  document.querySelector("#modifyBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.action="/todo/modify"
+    formObj.method="post"
+    formObj.submit()
+  }, false)
+  document.querySelector("#removeBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.action="/todo/remove"
+    formObj.method="post"
+    formObj.submit()
+  }, false)
+  document.querySelector("#listBtn").addEventListener("click", function (e){
+    e.preventDefault()
+    e.stopPropagation()
+    formObj.reset()
+    self.location="/todo/list"
+  }, false)
+</script>
+</html>
