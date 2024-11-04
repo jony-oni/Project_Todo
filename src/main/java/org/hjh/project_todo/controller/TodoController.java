@@ -31,11 +31,12 @@ public class TodoController {
     }
     @GetMapping("/register")
     public void registerGet(){
+
         log.info("controller registerGet");
     }
     @PostMapping("/register")
     public String registerPost(Todo todo){
-        log.info("controller registerPost");
+        log.info("controller registerPost"+todo);
         todoService.saveTodo(todo);
         return "redirect:/todo/list";
     }

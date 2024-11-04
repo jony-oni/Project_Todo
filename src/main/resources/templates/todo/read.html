@@ -27,11 +27,12 @@
 
         <div class="input-group mb-3">
           <span class="input-group-text">Complete</span>
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:value="${dto.complete}" readonly>
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete?'checked':null}" readonly>
         </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text">DueDate</span>
+
           <input type="date" name="due_date" class="form-control" th:value="${dto.due_date}" readonly>          <
         </div>
 

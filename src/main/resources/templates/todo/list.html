@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/basic.html}">
 
-
+<body>
 <div layout:fragment="content">
   <div class="card">
     <div class="card-header">
@@ -36,7 +36,7 @@
           <th scope="row">[[${dto.todo_id}]]</th>
           <td><a th:href="@{/todo/read(todo_id=${dto.todo_id})}">[[${dto.title}]]</a></td>
           <td>[[${dto.description}]]</td>
-          <td>[[${dto.complete}]]</td>
+          <td><input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete ?: false ? 'checked' : ''}"></td>
           <td>[[${#temporals.format(dto.due_date,'yyyy-MM-dd')}]]</td>
         </tr>
       </table>
@@ -47,7 +47,7 @@
   </div>
 
 </div>
-
+</body>
 
 
 <script layout:fragment="script" th:inline="javascript">

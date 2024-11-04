@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
@@ -24,5 +25,5 @@ public class TodoDTO {
     @NotEmpty
     private String description;
     private Boolean complete;
-    private LocalDateTime due_date;
+    private LocalDate due_date;
 }

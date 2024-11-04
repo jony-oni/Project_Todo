@@ -10,6 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -26,14 +27,19 @@ public class Todo {
     private String title;
     private String description;
 
-    @ColumnDefault("false")
+
     private Boolean complete;
-    @CreationTimestamp
+
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDateTime due_date;
+    private LocalDate due_date;
 
     public void change(@NotEmpty String title, @NotEmpty String description) {
         this.title = title;
         this.description = description;
+    }
+    @PrePersist
+    public void prePersist(){
+        this.complete = Boolean.FALSE;
     }
 }
