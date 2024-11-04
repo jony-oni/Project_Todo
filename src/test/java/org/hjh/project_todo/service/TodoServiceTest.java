@@ -8,13 +8,14 @@ import org.hjh.project_todo.dto.TodoDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 @SpringBootTest
 @Log4j2
 public class TodoServiceTest {
-   /* @Autowired
+    @Autowired
     private TodoService todoService;
-    @Test
+    /*@Test
     public void testRegister(){
         log.info(todoService.getClass().getName());
 
@@ -23,7 +24,7 @@ public class TodoServiceTest {
                 .description("Sample description")
                 .complete(false)
                 .build();
-        Long todo_id = todoService.register(todoDTO);
+//        Long todo_id = todoService.saveTodo();
         log.info("todo_id"+todo_id);
     }
     @Test
@@ -36,8 +37,8 @@ public class TodoServiceTest {
                 .build();
 
         todoService.modify(todoDTO);
-    }
-    @Test
+    }*/
+   /* @Test
     public void testList(){
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
                 .type("tcw")
@@ -48,5 +49,16 @@ public class TodoServiceTest {
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList()list(pageRequestDTO);
         log.info(responseDTO);
     }*/
+    @Test
+    public void testList(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .type("td")
+                .keyword("1")
+                .page(1)
+                .size(7)
+                .build();
+        PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
+
+    }
 
 }

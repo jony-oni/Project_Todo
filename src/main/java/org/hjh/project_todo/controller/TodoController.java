@@ -24,10 +24,14 @@ public class TodoController {
     private final TodoService todoService;
 
     @GetMapping("/list")
-    public void list(Model model) {
+    public void list(PageRequestDTO pageRequestDTO,Model model) {
         log.info("controller list");
-        model.addAttribute("todoList", todoService.getList());
-        //model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+        //model.addAttribute("todoList", todoService.getList());
+
+        PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
+        log.info(responseDTO);
+        model.addAttribute("responseDTO", responseDTO);
+        /*model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));*/
     }
     @GetMapping("/register")
     public void registerGet(){
@@ -42,22 +46,22 @@ public class TodoController {
     }
 
     @GetMapping({"/read","/modify"})
-    public void read(Long todo_id,Model model){
-        log.info("controller read"+todo_id);
-        model.addAttribute("dto",todoService.getTodo(todo_id));
+    public void read(Long todoId,PageRequestDTO pageRequestDTO, Model model){
+        log.info("controller read"+todoId);
+        model.addAttribute("dto",todoService.getTodo(todoId));
     }
 
     @PostMapping("/modify")
-    public String modify(Todo todo, RedirectAttributes redirectAttributes){
+    public String modify(Todo todo, PageRequestDTO pageRequestDTO,RedirectAttributes redirectAttributes){
         log.info("controller modify"+todo);
         todoService.updateTodo(todo);
-        redirectAttributes.addAttribute("todo_id", todo.getTodo_id());
+        redirectAttributes.addAttribute("todoId", todo.getTodoId());
         return "redirect:/todo/read";
     }
     @PostMapping("/remove")
     public String remove(Todo todo){
         log.info("controller remove"+todo);
-        todoService.deleteTodo(todo.getTodo_id());
+        todoService.deleteTodo(todo.getTodoId());
         return "redirect:/todo/list";
     }
 }

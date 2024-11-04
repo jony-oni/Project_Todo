@@ -47,18 +47,39 @@ public class TodoServiceImpl implements TodoService{
                 .build();
     }*/
 
-    @Override
+    /*@Override
     public List<Todo> getList() {
         log.info("getList");
         List<Todo> todoList =todoRepository.findAll();
         log.info("getList");
         return todoList;
+    }*/
+
+    @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+        Pageable pageable = pageRequestDTO.getPageable("todoId");
+
+        //Page<Todo> result = todoRepository.findAll(pageable);
+        Page<Todo> result = todoRepository.searchAll(types,keyword,pageable);
+
+        List<TodoDTO> dtoList = result.getContent().stream()
+                .map(todo -> modelMapper.map(todo, TodoDTO.class))
+                .collect(Collectors.toList());
+
+        return PageResponseDTO.<TodoDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int)result.getTotalElements())
+                .build();
     }
 
     @Override
-    public Todo getTodo(Long todo_id) {
-        log.info("getTodo"+todo_id);
-        return todoRepository.findById(todo_id).get();
+    public Todo getTodo(Long todoId) {
+        log.info("getTodo"+todoId);
+        return todoRepository.findById(todoId).get();
     }
 
     @Override
@@ -70,19 +91,19 @@ public class TodoServiceImpl implements TodoService{
     @Override
     public void updateTodo(Todo todo) {
         log.info("Update todo"+todo);
-        Todo oldTodo = todoRepository.findById(todo.getTodo_id()).get();
+        Todo oldTodo = todoRepository.findById(todo.getTodoId()).get();
         oldTodo.setTitle(todo.getTitle());
         oldTodo.setDescription(todo.getDescription());
-        oldTodo.setDue_date(todo.getDue_date());
+        oldTodo.setDueDate(todo.getDueDate());
 
         oldTodo.setComplete(todo.getComplete());
-        
+
         todoRepository.save(oldTodo);
     }
 
     @Override
-    public void deleteTodo(Long todo_id) {
-        log.info("Delete Todo+" + todo_id);
-        todoRepository.deleteById(todo_id);
+    public void deleteTodo(Long todoId) {
+        log.info("Delete Todo+" + todoId);
+        todoRepository.deleteById(todoId);
     }
 }

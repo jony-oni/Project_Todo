@@ -9,10 +9,16 @@ import java.util.List;
 
 public interface TodoService {
 
-    List<Todo> getList();
-    //PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+    /*List<Todo> getList();
     Todo getTodo(Long todo_id);
     void saveTodo(Todo todo);
     void updateTodo(Todo todo);
-    void deleteTodo(Long todo_id);
+    void deleteTodo(Long todo_id);*/
+
+
+    PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+    Todo getTodo(Long todoId);
+    void saveTodo(Todo todo);
+    void updateTodo(Todo todo);
+    void deleteTodo(Long todoId);
 }

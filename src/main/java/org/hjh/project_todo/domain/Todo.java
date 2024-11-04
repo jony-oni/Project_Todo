@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+
 @Data
 @Table(name="todos")
 @Builder
@@ -22,8 +23,8 @@ import java.time.LocalDateTime;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long todo_id;
-    private String member_id;
+    private Long todoId;
+    private String memberId;
     private String title;
     private String description;
 
@@ -32,7 +33,7 @@ public class Todo {
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate due_date;
+    private LocalDate dueDate;
 
     public void change(@NotEmpty String title, @NotEmpty String description) {
         this.title = title;

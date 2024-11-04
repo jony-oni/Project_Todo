@@ -12,7 +12,7 @@
       <!--<form action="/todo/register" method="post">-->
         <div class="input-group mb-3">
          <span class="input-group-text">Todo_id</span>
-          <input type="text" name="todo_id" class="form-control" th:value="${dto.todo_id}" readonly>
+          <input type="text" name="todo_id" class="form-control" th:value="${dto.todoId}" readonly>
         </div>
 
         <div class="input-group mb-3">
@@ -33,7 +33,7 @@
         <div class="input-group mb-3">
           <span class="input-group-text">DueDate</span>
 
-          <input type="date" name="due_date" class="form-control" th:value="${dto.due_date}" readonly>          <
+          <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}" readonly>          <
         </div>
 
         <!--<div class="input-group mb-3">
@@ -44,10 +44,26 @@
           <button type="reset" class="btn btn-secondary">List</button>
         </a>
       </div>-->
-      <div class="input-group mb-3">
+
+      <div class="input-group mb-3" th:with="link = ${pageRequestDTO.getLink()}">
+        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}|" class="text-decoration-none">
+          <button type="button" class="btn btn-primary"> Modify </button>
+        </a>
+
+        <a th:href="|@{/todo/list}?${link}|" class="text-decoration-none">
+          <button type="reset" class="btn btn-secondary">List</button>
+        </a>
+
+      </div>
+
+      <!--<div class="input-group mb-3">
         <a th:href="@{/todo/modify(todo_id=${dto.todo_id})}" class="btn btn-primary">Modify</a>
         <a th:href="@{/todo/list}" class="btn btn-secondary">List</a>
       </div>
+
+
+-->
+
 
     </div>
   </div>

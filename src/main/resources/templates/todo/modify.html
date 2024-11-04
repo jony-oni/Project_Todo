@@ -10,7 +10,7 @@
       <h5 class="card-title">Modify Page</h5>
 
       <form action="/todo/modify" method="post">
-        <input type="hidden" name="todo_id" th:value="${dto.todo_id}">
+        <input type="hidden" name="todoId" th:value="${dto.todoId}">
 
 
         <div class="input-group mb-3">
@@ -30,7 +30,7 @@
 
         <div class="input-group mb-3">
           <span class="input-group-text">DueDate</span>
-          <input type="date" name="due_date" class="form-control" th:value="${dto.due_date}">
+          <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}">
         </div>
 
         <div class="input-group mb-3">

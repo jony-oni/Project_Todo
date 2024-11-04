@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class TodoDTO {
-    private Long todo_id;
-    private String member_id;
+    private Long todoId;
+    private String memberId;
 
     @NotEmpty
     private String title;
@@ -25,5 +25,5 @@ public class TodoDTO {
     @NotEmpty
     private String description;
     private Boolean complete;
-    private LocalDate due_date;
+    private LocalDate dueDate;
 }

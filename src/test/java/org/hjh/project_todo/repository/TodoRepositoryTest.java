@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.IntStream;
@@ -21,14 +22,14 @@ public class TodoRepositoryTest {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             Todo todo = Todo.builder()
                     .title("Title" + i)
-                    .member_id("sample member")
+                    .memberId("sample member")
                     .description("Description" + i)
                     .complete(false)
-                    .due_date(LocalDateTime.now())
+                    .dueDate(LocalDate.now())
                     .build();
 
             Todo result = todoRepository.save(todo);
-            log.info("TodoId" + result.getTodo_id());
+            log.info("TodoId" + result.getTodoId());
         });
 
 
