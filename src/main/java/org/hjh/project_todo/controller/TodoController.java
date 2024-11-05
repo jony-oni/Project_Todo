@@ -30,22 +30,14 @@ public class TodoController {
     public void list(PageRequestDTO pageRequestDTO,Model model) {
         log.info("controller list");
         //model.addAttribute("todoList", todoService.getList());
-
 //        log.info("pageType=" + pageRequestDTO.getPageType());
-
 
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
         log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
-        /*model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));*/
+
     }
-    @GetMapping("/listtoday")
-    public String todayList(PageRequestDTO pageRequestDTO, Model model) {
-        pageRequestDTO.setDueDate(LocalDate.now());  // 오늘 날짜 설정
-        model.addAttribute("responseDTO", todoService.getTodayList(pageRequestDTO));
-        model.addAttribute("returnTo", "today");
-        return "/todo/listtoday";
-    }
+
     @GetMapping("/register")
     public void registerGet(){
 
@@ -58,48 +50,61 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
-    //그냥 list만 사용할 시 [기존]
-
-    /*@GetMapping({"/read","/modify"})
-    public void read(Long todoId,PageRequestDTO pageRequestDTO, Model model){
-        log.info("controller read"+todoId);
-        model.addAttribute("dto",todoService.getTodo(todoId));
-    }*/
-
-   /* @PostMapping("/modify")
-    public String modify(Todo todo, PageRequestDTO pageRequestDTO,RedirectAttributes redirectAttributes){
-        log.info("controller modify"+todo);
-        todoService.updateTodo(todo);
-        redirectAttributes.addAttribute("todoId", todo.getTodoId());
-        return "redirect:/todo/read";
-    }*/
 
     @GetMapping({"/read", "/modify"})
-    public void read(@RequestParam Long todoId, @RequestParam(required = false) String returnTo, PageRequestDTO pageRequestDTO, Model model) {
+    public void read(@RequestParam Long todoId,
+                     @RequestParam(required = false) String pageType,
+                     Model model ) {
         log.info("controller read" + todoId);
         model.addAttribute("dto", todoService.getTodo(todoId));
-        model.addAttribute("returnTo", returnTo); // returnTo 추가
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+//        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+//                .type()
+//                .keyword()
+//                .pageType()
+//                .dueDate()
+//                .build();
+        log.info(pageRequestDTO);
+        pageRequestDTO.setPageType(pageType);
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
     }
 
     @PostMapping("/modify")
-    public  String modify(Todo todo, @RequestParam(required = false) String returnTo, RedirectAttributes redirectAttributes){
-        log.info("controller modify"+todo);
+    public String modify(Todo todo,
+                         @RequestParam(required = false) String returnTo,
+                         @RequestParam(required = false) String pageType,
+                         RedirectAttributes redirectAttributes) {
+        log.info("Modifying Todo: {}", todo);
         todoService.updateTodo(todo);
-        redirectAttributes.addAttribute("todoId",todo.getTodoId());
+        redirectAttributes.addAttribute("todoId", todo.getTodoId());
 
-        if(returnTo.equals("listtoday")){
-            return "redirect:/todo/listtoday"; //list today 에서 수정한 경우
-        }else {
-            return "redirect:/todo/list"; //list 에서 수정한 경우}
+        if (pageType == null || pageType.isEmpty()) {
+            pageType = "list"; // 기본 목록으로 설정
         }
 
+        redirectAttributes.addAttribute("pageType", pageType);
+
+
+
+        // pageType을 URL 파라미터로 추가하여 리다이렉트
+        return "redirect:/todo/list";
     }
 
 
     @PostMapping("/remove")
-    public String remove(Todo todo){
-        log.info("controller remove"+todo);
+    public String remove(Todo todo, @RequestParam(required = false) String pageType) {
+        log.info("controller remove" + todo);
         todoService.deleteTodo(todo.getTodoId());
-        return "redirect:/todo/list";
+
+        // pageType에 따라 리다이렉트 경로 결정
+        if ("today".equals(pageType)) {
+            return "redirect:/todo/listtoday"; // 오늘 목록에서 삭제한 경우
+        } else if ("upcoming".equals(pageType)) {
+            return "redirect:/todo/listupcoming"; // 예정 목록에서 삭제한 경우
+        } else if ("past".equals(pageType)) {
+            return "redirect:/todo/listpast"; // 지난 목록에서 삭제한 경우
+        } else {
+            return "redirect:/todo/list"; // 기본 목록에서 삭제한 경우
+        }
     }
 }

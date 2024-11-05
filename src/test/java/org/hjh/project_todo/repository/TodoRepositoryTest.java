@@ -6,6 +6,7 @@ import org.hjh.project_todo.domain.Todo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,4 +46,13 @@ public class TodoRepositoryTest {
 
         log.info(todo);
     }
+
+//    @Test
+//    public void testSearchAll() {
+//
+//        String[] types = {"t", "d"};
+//        String keyword = "5";
+//        Pageable pageable
+//
+//    }
 }

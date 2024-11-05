@@ -11,8 +11,8 @@
 
       <form action="/todo/modify" method="post">
         <input type="hidden" name="todoId" th:value="${dto.todoId}">
-        <input type="hidden" name="returnTo" th:value="${returnTo}">
-
+        <input type="hidden" name="returnTo" th:value="${returnTo != null ? returnTo : 'list'}">
+        <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
 
         <div class="input-group mb-3">
           <span class="input-group-text">Title</span>
@@ -52,10 +52,13 @@
   document.querySelector("#modifyBtn").addEventListener("click", function (e){
     e.preventDefault()
     e.stopPropagation()
-    formObj.action="/todo/modify"
+    var pageType = document.querySelector("#pageType").value
+    console.log("pageType="+pageType)
+    formObj.action="/todo/modify?pageType="+pageType
     formObj.method="post"
     formObj.submit()
   }, false)
+
   document.querySelector("#removeBtn").addEventListener("click", function (e){
     e.preventDefault()
     e.stopPropagation()
@@ -63,6 +66,7 @@
     formObj.method="post"
     formObj.submit()
   }, false)
+
  /* document.querySelector("#listBtn").addEventListener("click", function (e){
     e.preventDefault()
     e.stopPropagation()
@@ -74,11 +78,18 @@
     e.preventDefault();
     e.stopPropagation();
 
-    const returnToValue = this.getAttribute("data-return-to") || 'list'; // data-return-to에서 값을 가져옴
-    if (returnToValue === 'listtoday') {
-      self.location = "/todo/listtoday"; // today로 이동
+    const returnToValue = this.getAttribute("data-return-to") || 'list';
+    const pageTypeValue = this.getAttribute("data-page-type"); // pageType을 가져옵니다.
+
+    // pageType에 따른 URL 리디렉션
+    if (pageTypeValue === 'today') {
+      self.location = "/todo/listtoday"; // 오늘 목록으로 이동
+    } else if (pageTypeValue === 'upcoming') {
+      self.location = "/todo/listupcoming"; // 예정 목록으로 이동
+    } else if (pageTypeValue === 'past') {
+      self.location = "/todo/listpast"; // 지난 목록으로 이동
     } else {
-      self.location = "/todo/list"; // 전체 목록으로 이동
+      self.location = "/todo/list"; // 기본 목록으로 이동
     }
   }, false)
 </script>

@@ -27,35 +27,6 @@ public class TodoServiceImpl implements TodoService{
     private final TodoRepository todoRepository;
     private final ModelMapper modelMapper;
 
-    /*@Override
-    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
-        log.info("getlist");
-
-        String[] types = pageRequestDTO.getTypes();
-        String keyword = pageRequestDTO.getKeyword();
-        Pageable pageable = pageRequestDTO.getPageable("todo_id");
-
-        Page<Todo> result = todoRepository.findAll(pageable);
-        //Page<Todo> result = todoRepository.searchAll(types,keyword,pageable);
-
-        List<TodoDTO> dtoList=result.getContent().stream()
-                .map(todo -> modelMapper.map(todo, TodoDTO.class))
-                .collect(Collectors.toUnmodifiableList());
-
-        return PageResponseDTO.<TodoDTO>withAll()
-                .pageRequestDTO(pageRequestDTO)
-                .dtoList(dtoList)
-                .total((int)result.getTotalElements())
-                .build();
-    }*/
-
-    /*@Override
-    public List<Todo> getList() {
-        log.info("getList");
-        List<Todo> todoList =todoRepository.findAll();
-        log.info("getList");
-        return todoList;
-    }*/
 
     @Override
     public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
