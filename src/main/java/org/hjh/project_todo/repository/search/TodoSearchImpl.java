@@ -18,7 +18,7 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
     }
 
     @Override
-    public Page<Todo> searchAll(String[] types, String keyword, Pageable pageable) {
+    public Page<Todo> searchAll(String[] types, String keyword, Pageable pageable, String pageType) {
         QTodo todo = QTodo.todo;
         JPQLQuery<Todo> query = from(todo);
         if((types != null && types.length > 0) && (keyword != null)) {

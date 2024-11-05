@@ -10,12 +10,15 @@ import org.springframework.data.domain.Sort;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.time.LocalDate;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequestDTO {
+
+
     @Builder.Default
     private int page = 1;
 
@@ -25,6 +28,10 @@ public class PageRequestDTO {
     private String type;
     private String keyword;
 
+    //페이지 유형 (all, today, upcoming)
+    private String pageType;
+    private LocalDate dueDate;
+
     public String[] getTypes(){
         if(type == null || type.isEmpty()){
             return null;
@@ -32,8 +39,12 @@ public class PageRequestDTO {
         return type.split("");
     }
 
-    public Pageable getPageable(String...props) {
+    /*public Pageable getPageable(String...props) {
         return PageRequest.of(this.page-1, this.size, Sort.by(props).descending());
+    }*/
+
+    public Pageable getPageable(Sort.Direction direction, String... props) {
+        return PageRequest.of(this.page - 1, this.size, Sort.by(direction, props));
     }
 
     private String link;
@@ -56,6 +67,10 @@ public class PageRequestDTO {
                     builder.append("&keyword=" + URLEncoder.encode(keyword,"UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                 }
+            }
+            //pageType 파라미터 추가
+            if(pageType != null){
+                builder.append("&pageType=" + pageType);
             }
             link = builder.toString();
         }

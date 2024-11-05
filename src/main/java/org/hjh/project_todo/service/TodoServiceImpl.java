@@ -10,9 +10,11 @@ import org.hjh.project_todo.repository.TodoRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,10 +62,11 @@ public class TodoServiceImpl implements TodoService{
 
         String[] types = pageRequestDTO.getTypes();
         String keyword = pageRequestDTO.getKeyword();
-        Pageable pageable = pageRequestDTO.getPageable("todoId");
+        String pageType = pageRequestDTO.getPageType();
+        Pageable pageable = pageRequestDTO.getPageable(Sort.Direction.ASC, "dueDate");
 
         //Page<Todo> result = todoRepository.findAll(pageable);
-        Page<Todo> result = todoRepository.searchAll(types,keyword,pageable);
+        Page<Todo> result = todoRepository.searchAll(types,keyword,pageable,pageType);
 
         List<TodoDTO> dtoList = result.getContent().stream()
                 .map(todo -> modelMapper.map(todo, TodoDTO.class))
@@ -75,6 +78,34 @@ public class TodoServiceImpl implements TodoService{
                 .total((int)result.getTotalElements())
                 .build();
     }
+
+    @Override
+    public PageResponseDTO<TodoDTO> getTodayList(PageRequestDTO pageRequestDTO) {
+        pageRequestDTO.setDueDate(LocalDate.now());
+
+        // 필터링에 사용될 타입과 키워드를 가져옴
+        String[] types = pageRequestDTO.getTypes();
+        String keyword = pageRequestDTO.getKeyword();
+
+        // 페이징 정보를 생성
+        Pageable pageable = pageRequestDTO.getPageable(Sort.Direction.ASC, "dueDate"); // 정렬 기준으로 dueDate 사용
+
+        // 오늘의 투두 리스트를 가져오는 쿼리 호출
+        Page<Todo> result = todoRepository.findByDueDate(pageRequestDTO.getDueDate(), pageable);
+
+        // 결과를 DTO로 변환
+        List<TodoDTO> dtoList = result.getContent().stream()
+                .map(todo -> modelMapper.map(todo, TodoDTO.class))
+                .collect(Collectors.toList());
+
+        // PageResponseDTO 객체를 생성하여 반환
+        return PageResponseDTO.<TodoDTO>withAll()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total((int) result.getTotalElements())
+                .build();
+    }
+
 
     @Override
     public Todo getTodo(Long todoId) {

@@ -17,6 +17,7 @@ public interface TodoService {
 
 
     PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO);
+    PageResponseDTO<TodoDTO> getTodayList(PageRequestDTO pageRequestDTO);
     Todo getTodo(Long todoId);
     void saveTodo(Todo todo);
     void updateTodo(Todo todo);

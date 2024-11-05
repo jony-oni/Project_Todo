@@ -27,8 +27,6 @@ public class Todo {
     private String memberId;
     private String title;
     private String description;
-
-
     private Boolean complete;
 
 

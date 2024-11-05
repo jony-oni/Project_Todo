@@ -11,6 +11,7 @@
 
       <form action="/todo/modify" method="post">
         <input type="hidden" name="todoId" th:value="${dto.todoId}">
+        <input type="hidden" name="returnTo" th:value="${returnTo}">
 
 
         <div class="input-group mb-3">
@@ -36,7 +37,7 @@
         <div class="input-group mb-3">
           <button type="button" id="modifyBtn" class="btn btn-primary">Modify</button>
           <button type="button" id="removeBtn" class="btn btn-danger">Remove</button>
-          <button type="button" id="listBtn" class="btn btn-secondary">List</button>
+          <button type="button" id="listBtn" class="btn btn-secondary" data-return-to="${returnTo}">List</button> <!-- data-return-to 추가 -->
         </div>
 
       </form>
@@ -62,11 +63,23 @@
     formObj.method="post"
     formObj.submit()
   }, false)
-  document.querySelector("#listBtn").addEventListener("click", function (e){
+ /* document.querySelector("#listBtn").addEventListener("click", function (e){
     e.preventDefault()
     e.stopPropagation()
     formObj.reset()
     self.location="/todo/list"
+  }, false)*/
+
+  document.querySelector("#listBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const returnToValue = this.getAttribute("data-return-to") || 'list'; // data-return-to에서 값을 가져옴
+    if (returnToValue === 'listtoday') {
+      self.location = "/todo/listtoday"; // today로 이동
+    } else {
+      self.location = "/todo/list"; // 전체 목록으로 이동
+    }
   }, false)
 </script>
 </html>
