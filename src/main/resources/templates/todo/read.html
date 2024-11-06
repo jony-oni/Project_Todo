@@ -11,10 +11,10 @@
 
       <!--<form action="/todo/register" method="post">-->
       <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
-        <div class="input-group mb-3">
+       <!-- <div class="input-group mb-3">
          <span class="input-group-text">Todo_id</span>
           <input type="text" name="todoId" class="form-control" th:value="${dto.todoId}" readonly>
-        </div>
+        </div>-->
 
         <div class="input-group mb-3">
           <span class="input-group-text">Title</span>
@@ -26,16 +26,18 @@
           <textarea name="description" class="form-control col-sm-5" rows="5" readonly>[[${dto.description}]]</textarea>
         </div>
 
-        <div class="input-group mb-3">
-          <span class="input-group-text">Complete</span>
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete?'checked':null}" readonly>
-        </div>
 
         <div class="input-group mb-3">
           <span class="input-group-text">DueDate</span>
 
           <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}" readonly>
         </div>
+
+       <div class="input-group mb-3">
+          <span class="input-group-text">Complete</span>
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" th:checked="${dto.complete?'checked':null}" readonly>
+        </div>
+
 
 
 

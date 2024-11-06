@@ -25,6 +25,11 @@
         </div>
 
 
+        <div class="input-group mb-3">
+          <span class="input-group-text">DueDate</span>
+          <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}">
+        </div>
+
         <!--<input type="hidden" name="complete" value="false">-->
         <div class="input-group mb-3">
           <span class="input-group-text">Complete</span>
@@ -32,14 +37,12 @@
         </div>
 
         <div class="input-group mb-3">
-          <span class="input-group-text">DueDate</span>
-          <input type="date" name="dueDate" class="form-control" th:value="${dto.dueDate}">
-        </div>
-
-        <div class="input-group mb-3">
           <button type="button" id="modifyBtn" class="btn btn-primary">Modify</button>
           <button type="button" id="removeBtn" class="btn btn-danger">Remove</button>
-          <button type="button" id="listBtn" class="btn btn-secondary" data-return-to="${returnTo}">List</button> <!-- data-return-to 추가 -->
+
+          <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+            <button type="button" class="btn btn-secondary">List</button>
+          </a> <!-- data-return-to 추가 -->
         </div>
 
       </form>
@@ -50,6 +53,7 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
+
   const formObj=document.querySelector("form");
   document.querySelector("#modifyBtn").addEventListener("click", function (e){
     e.preventDefault()
@@ -61,38 +65,36 @@
     formObj.submit()
   }, false)
 
-  document.querySelector("#removeBtn").addEventListener("click", function (e){
-    e.preventDefault()
-    e.stopPropagation()
-    formObj.action="/todo/remove"
-    formObj.method="post"
-    formObj.submit()
-  }, false)
 
- /* document.querySelector("#listBtn").addEventListener("click", function (e){
-    e.preventDefault()
-    e.stopPropagation()
-    formObj.reset()
-    self.location="/todo/list"
-  }, false)*/
-
-  document.querySelector("#listBtn").addEventListener("click", function (e) {
+/*  document.querySelector("#removeBtn").addEventListener("click", function (e) {
     e.preventDefault();
     e.stopPropagation();
 
-    const returnToValue = this.getAttribute("data-return-to") || 'list';
-    const pageTypeValue = this.getAttribute("data-page-type"); // pageType을 가져옵니다.
-
-    // pageType에 따른 URL 리디렉션
-    if (pageTypeValue === 'today') {
-      self.location = "/todo/listtoday"; // 오늘 목록으로 이동
-    } else if (pageTypeValue === 'upcoming') {
-      self.location = "/todo/listupcoming"; // 예정 목록으로 이동
-    } else if (pageTypeValue === 'past') {
-      self.location = "/todo/listpast"; // 지난 목록으로 이동
-    } else {
-      self.location = "/todo/list"; // 기본 목록으로 이동
+    // 삭제 확인 팝업
+    if (confirm('정말 삭제하시겠습니까?')) {
+      formObj.action = "/todo/remove";
+      formObj.method = "post";
+      formObj.submit();  // 확인을 누르면 폼을 제출하여 삭제 실행
     }
-  }, false)
+  }, false);*/
+
+  document.querySelector("#removeBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // 삭제 확인 팝업
+    if (confirm('정말 삭제하시겠습니까?')) {
+      var pageType = document.querySelector("#pageType").value; // pageType 값을 가져옵니다.
+      formObj.action = "/todo/remove?pageType=" + pageType;  // pageType을 action에 추가
+      formObj.method = "post";
+      formObj.submit();  // 확인을 누르면 폼을 제출하여 삭제 실행
+
+      // 삭제 후 리스트 페이지로 리디렉션
+      setTimeout(function() {
+        window.location.href = "/todo/list?pageType=" + pageType; // 삭제 후, pageType에 맞는 페이지로 리디렉션
+      }, 500); // 삭제 후 잠시 기다린 후 리디렉션
+    }
+  }, false);
+
 </script>
 </html>

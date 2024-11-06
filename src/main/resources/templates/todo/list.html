@@ -37,7 +37,16 @@
     </div>
     <div class="card-body">
 
-      <h5 class="card-title" >username님의 모든 일정입니다.</h5>
+      <h5>
+        <span th:switch="${pageRequestDTO.pageType}">
+          <span th:case="'list'">username님의 모든 일정입니다.</span>
+          <span th:case="'today'">username님의 오늘 일정입니다.</span>
+          <span th:case="'upcoming'">username님의 다가오는 일정입니다.</span>
+           <span th:case="'past'">username님의 지난 일정입니다.</span>
+           <span th:case="'completed'">username님의 완료된 일정입니다.</span>
+           <span th:case="*">username님의 일정입니다.</span> <!-- 기본값 -->
+        </span>
+      </h5>
       <div>
         <a th:href="@{/todo/register(pageType=${pageRequestDTO.pageType})}" class="text-decoration-none">
           <button type="button" class="btn btn-outline-secondary">일정 등록</button>
@@ -59,6 +68,9 @@
           <th scope="col">Complete</th>
           <th scope="col">Title</th>
           <th scope="col">Description</th>
+          <th scope="col"></th>
+
+
 
 
         </tr>
@@ -72,6 +84,41 @@
           <!--<td><a th:href="@{/todo/read(todo_id=${dto.todo_id})}">[[${dto.title}]]</a></td>-->
           <td><a th:href="|@{/todo/read(todoId=${dto.todoId})}&${link}|">[[${dto.title}]]</a></td>
           <td>[[${dto.description}]]</td>
+
+          <td>
+            <div class="input-group mb-3">
+              <!-- 수정 버튼 -->
+              <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+                <button type="button" class="btn btn-outline-success btn-sm ">수정</button>
+              </a>
+
+              <!-- 삭제 버튼 -->
+              <form action="/todo/remove" method="post" style="display:inline;">
+                <input type="hidden" name="todoId" th:value="${dto.todoId}">
+                <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+                <button type="button" class="btn btn-outline-danger btn-sm " onclick="confirmDelete(this.form)">삭제</button>
+              </form>
+            </div>
+          </td>
+
+          <!--<td>
+            <div class="input-group mb-3" th:with="link = ${pageRequestDTO.getLink()}">
+              <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+                <button type="button" class="btn btn-outline-success btn-sm">수정</button>
+              </a>
+            </div>
+
+          </td>
+          <td>
+            <form action="/todo/remove" method="post" style="display:inline;">
+              <input type="hidden" name="todoId" th:value="${dto.todoId}">
+              <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+              <button type="button" class="btn btn-outline-danger btn-sm " onclick="confirmDelete(this.form)">삭제</button>
+            </form>
+
+          </td>
+-->
+
 
 
         </tr>
@@ -115,5 +162,14 @@
     formObj.innerHTML += `<input type=h'hidden' name='page' value='${num}'>`
     formObj.submit()
   })
+
+  function confirmDelete(form) {
+    if (confirm('정말 삭제하시겠습니까?')) {
+      form.submit();  // 확인을 누르면 폼을 제출합니다.
+    }
+  }
+
+
+
 </script>
 </html>

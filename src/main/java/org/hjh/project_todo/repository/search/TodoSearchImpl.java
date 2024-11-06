@@ -55,6 +55,11 @@ public class TodoSearchImpl extends QuerydslRepositorySupport implements TodoSea
                 case "upcoming":
                     query.where(todo.dueDate.gt(LocalDate.now()).or(todo.dueDate.isNull())); // dueDate가 null인 경우 포함
                     break;
+
+                case "completed":
+                    query.where(todo.complete.eq(true)); // complete가 true인 Todo 항목만
+                    break;
+
                 case "list":
                     // 기본적으로 모든 Todo 항목
                     break; // 이 경우는 추가적인 조건이 필요 없음

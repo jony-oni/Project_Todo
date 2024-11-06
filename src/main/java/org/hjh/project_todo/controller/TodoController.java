@@ -121,15 +121,6 @@ public class TodoController {
         log.info("controller remove" + todo);
         todoService.deleteTodo(todo.getTodoId());
 
-        // pageType에 따라 리다이렉트 경로 결정
-        if ("today".equals(pageType)) {
-            return "redirect:/todo/listtoday"; // 오늘 목록에서 삭제한 경우
-        } else if ("upcoming".equals(pageType)) {
-            return "redirect:/todo/listupcoming"; // 예정 목록에서 삭제한 경우
-        } else if ("past".equals(pageType)) {
-            return "redirect:/todo/listpast"; // 지난 목록에서 삭제한 경우
-        } else {
-            return "redirect:/todo/list"; // 기본 목록에서 삭제한 경우
-        }
+        return "redirect:/todo/list?pageType=" + pageType;
     }
 }
