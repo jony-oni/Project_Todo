@@ -38,7 +38,7 @@ public class TodoController {
 
     }
 
-    @GetMapping("/register")
+    /*@GetMapping("/register")
     public void registerGet(){
 
         log.info("controller registerGet");
@@ -48,6 +48,31 @@ public class TodoController {
         log.info("controller registerPost"+todo);
         todoService.saveTodo(todo);
         return "redirect:/todo/list";
+    }*/
+
+    @GetMapping("/register")
+    public void registerGet(@RequestParam(required = false) String pageType, Model model) {
+        log.info("controller registerGet");
+
+        PageRequestDTO pageRequestDTO = new PageRequestDTO();
+        pageRequestDTO.setPageType(pageType);
+
+        model.addAttribute("pageRequestDTO", pageRequestDTO);
+    }
+    @PostMapping("/register")
+    public String registerPost(Todo todo,
+                               @RequestParam(required = false) String pageType,
+                               RedirectAttributes redirectAttributes) {
+        log.info("controller registerPost " + todo);
+        todoService.saveTodo(todo);
+
+        // pageType이 null이거나 비어 있는 경우 기본값을 설정
+        if (pageType == null || pageType.isEmpty()) {
+            pageType = "list";  // 기본 페이지 유형으로 설정
+        }
+
+        redirectAttributes.addAttribute("pageType", pageType);
+        return "redirect:/todo/list?" + pageType;
     }
 
 

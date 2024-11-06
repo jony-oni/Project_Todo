@@ -98,7 +98,7 @@ public class TodoServiceImpl implements TodoService{
         oldTodo.setDescription(todo.getDescription());
         oldTodo.setDueDate(todo.getDueDate());
 
-        oldTodo.setComplete(todo.getComplete());
+        oldTodo.setComplete(todo.getComplete() != null ? todo.getComplete() : false);
 
         todoRepository.save(oldTodo);
     }

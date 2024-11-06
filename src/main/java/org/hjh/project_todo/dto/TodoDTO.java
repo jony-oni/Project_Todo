@@ -24,6 +24,7 @@ public class TodoDTO {
 
     @NotEmpty
     private String description;
+
     private Boolean complete;
     private LocalDate dueDate;
 }

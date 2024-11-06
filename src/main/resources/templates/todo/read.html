@@ -10,6 +10,7 @@
       <h5 class="card-title">Read Page</h5>
 
       <!--<form action="/todo/register" method="post">-->
+      <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
         <div class="input-group mb-3">
          <span class="input-group-text">Todo_id</span>
           <input type="text" name="todoId" class="form-control" th:value="${dto.todoId}" readonly>
@@ -41,10 +42,10 @@
 
 
       <div class="input-group mb-3" th:with="link = ${pageRequestDTO.getLink()}">
-        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}|" class="text-decoration-none">
+        <a th:href="|@{/todo/modify(todoId=${dto.todoId})}&${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
           <button type="button" class="btn btn-primary">Modify</button>
         </a>
-        <a th:href="|@{/todo/list}?${link}|" class="text-decoration-none">
+        <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
           <button type="button" class="btn btn-secondary">List</button>
         </a>
       </div>

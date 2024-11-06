@@ -10,6 +10,7 @@
       <h5 class="card-title">Register Page</h5>
 
       <form action="/todo/register" method="post">
+        <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
 
 
         <div class="input-group mb-3">
