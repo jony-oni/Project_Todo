@@ -33,6 +33,7 @@
     width: 100%;
 
 }
+
 .main_top{
     height: 80px;
 }
@@ -51,8 +52,9 @@
 .top_menu li{
     font-size : 14px;
     margin-top: 15px;
-    width: 185px;
+    width: 200px;
     float: left;
+    padding-left: 30px;
 }
 
 .top_menu li > a{
@@ -71,13 +73,20 @@
 
 
 
+.container2{
 
+    margin: auto;
+    width: 100%;
+    background-color: #f8f8f8;
+
+}
 /*todo main*/
 .todo_main{
     height: 140px;
 
     display: flex;
     Justify-content:center;
+    padding-top: 20px;
 }
 
 
@@ -86,11 +95,13 @@
     height:50px;
 
 }
-.todo_maintext p{
+.todo_maintext span{
+    display: block;
     text-align: center;
     font-size: 25px;
     font-family: Pretendard-ExtraBold;
     color: hwb(183 21% 45%);
+
 
 }
 .todo_main_btn{
@@ -105,7 +116,7 @@
     color: #fff;
     border-radius: 20px;
     padding: 10px 25px;
-    font-family: Pretendard-regular;
+    font-family: Pretendard-Regular;
     background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -126,77 +137,108 @@
 
 
 
-.todo_main_table{
 
-    background: azure;
+
+
+
+.todo_main_table {
     display: flex;
-    Justify-content:center;
+    justify-content: center;
     align-items: center;
-
-}
-
-
-.todo_main_box2{
-    background: white;
-    width: 700px;
-
-}
-.todo-table{
+    padding: 20px;
     width: 100%;
-    text-align: left;
-    table-layout: fixed;
-    border-bottom: 1px solid lightblue;
+
 
 
 }
-.todo-table tr
 
-.todo-table td {
+.todo_main_box2 {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
 
-    padding: 10px;
+
+.todo-table {
+    width: 100%;
+
 
 }
-.table_dueDate{
-    padding: 10px;
-    font-family: Pretendard-Bold;
+
+
+
+
+.table_dueDate {
     font-size: 18px;
-    color: hsl(192, 42%, 24%);
+    font-family: Pretendard-Bold;
+    color: #3a9a96;
     text-align: left;
+    padding: 10px;
 }
-.table_checkbox{
-    width: 70px;
+
+
+.table_title {
+    height: 30px;
+    font-family: Pretendard-Bold;
+    font-size: 17px;
+
+
+    text-align: left;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+ .table_title a {
+     text-decoration: none !important;
+     color: #3a8e97;
+ }
+
+.table_description {
+    height: 60px;
+    font-family: Pretendard-light;
+    color: #8b8b8b;
+    font-size: 16px;
+    text-align: left;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+
+.table_checkbox {
+
+    width: 40px;
     text-align: center;
 }
 
-.table_title{
-    background: #0dcaf0;
-    width: 80%;
-    height: 20px;
-    font-family: Pretendard-Regular;
-    font-size: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    color: hwb(0 39% 61%);
+.table_checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
 }
-.table_description{
-    background: #afff9c;
-    width: 80%;
-    height: 30px;
-    font-family: Pretendard-light;
-    font-size: 16px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    color: hsl(0, 0%, 58%);
-}
-.table_icon{
-    background: #d9ffc6;
-    height: 80px;
-    width: 70px;
-}
-.tb_icon{
 
-    float: left;
-    margin: 0px 0px 0px 13px;
+.table_icon img {    cursor: pointer;
+    transition: opacity 0.2s ease;
+
 }
+
+.table_icon img:hover {
+    transform: scale(1.1);
+}
+.tb_icon {
+    width: 27px;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+
+
+
+
+
