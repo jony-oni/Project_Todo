@@ -35,20 +35,15 @@ public class TodoController {
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
         log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
+        // responseDTO.getDtoList()에서 첫 번째 TodoDTO의 dueDate만 가져오기
+        LocalDate firstDueDate = responseDTO.getDtoList().isEmpty() ? LocalDate.now() : responseDTO.getDtoList().get(0).getDueDate();
+        model.addAttribute("firstDueDate", firstDueDate);
+
+        String description = responseDTO.getDtoList().isEmpty() ? "sample description" : responseDTO.getDtoList().get(0).getDescription();
+        model.addAttribute("description", description);
 
     }
 
-    /*@GetMapping("/register")
-    public void registerGet(){
-
-        log.info("controller registerGet");
-    }
-    @PostMapping("/register")
-    public String registerPost(Todo todo){
-        log.info("controller registerPost"+todo);
-        todoService.saveTodo(todo);
-        return "redirect:/todo/list";
-    }*/
 
     @GetMapping("/register")
     public void registerGet(@RequestParam(required = false) String pageType, Model model) {
@@ -83,12 +78,7 @@ public class TodoController {
         log.info("controller read" + todoId);
         model.addAttribute("dto", todoService.getTodo(todoId));
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
-//        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-//                .type()
-//                .keyword()
-//                .pageType()
-//                .dueDate()
-//                .build();
+
         log.info(pageRequestDTO);
         pageRequestDTO.setPageType(pageType);
         model.addAttribute("pageRequestDTO", pageRequestDTO);

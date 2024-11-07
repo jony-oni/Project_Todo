@@ -15,50 +15,19 @@ import org.springframework.data.domain.Page;
 public class TodoServiceTest {
     @Autowired
     private TodoService todoService;
-    /*@Test
-    public void testRegister(){
-        log.info(todoService.getClass().getName());
 
-        TodoDTO todoDTO = TodoDTO.builder()
-                .title("Sample title")
-                .description("Sample description")
-                .complete(false)
-                .build();
-//        Long todo_id = todoService.saveTodo();
-        log.info("todo_id"+todo_id);
-    }
-    @Test
-    public void testModify(){
-        TodoDTO todoDTO = TodoDTO.builder()
-                .todo_id(3l)
-                .title("md_Sample title")
-                .description("md_Sample description")
-                .complete(false)
-                .build();
 
-        todoService.modify(todoDTO);
-    }*/
-   /* @Test
-    public void testList(){
-        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .type("tcw")
-                .keyword("1")
-                .page(1)
-                .size(7)
-                .build();
-        PageResponseDTO<TodoDTO> responseDTO = todoService.getList()list(pageRequestDTO);
-        log.info(responseDTO);
-    }*/
     @Test
     public void testList(){
         PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
-                .type("td")
-                .keyword("1")
+                .type(null)
+                .keyword(null)
                 .page(1)
                 .size(7)
                 .build();
         PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
 
+        log.info(responseDTO);
     }
 
 }

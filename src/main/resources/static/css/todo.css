@@ -1,0 +1,202 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'Pretendard-Light;';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+/*★ [공통] 상단 logo & Menu  ★ */
+
+.container{
+
+    margin: auto;
+    font-size: 16px;
+    width: 100%;
+
+}
+.main_top{
+    height: 80px;
+}
+
+.head_logo{
+    width: 200px;
+    margin: 10px 0px 0px 30px;
+    float: left;
+}
+
+.top_menu{
+    list-style: none;
+
+}
+
+.top_menu li{
+    font-size : 14px;
+    margin-top: 15px;
+    width: 185px;
+    float: left;
+}
+
+.top_menu li > a{
+    text-decoration: none;
+    color: #6c9694;
+    margin-left: 750%;
+    font-family:Pretendard-regular;
+}
+
+/*★ [공통] 상단 좌측 아이콘 ★ */
+
+.icon_sidebar{
+    height: 60px;
+    padding: 0px 0px 0px 30px;
+}
+
+
+
+
+/*todo main*/
+.todo_main{
+    height: 140px;
+
+    display: flex;
+    Justify-content:center;
+}
+
+
+.todo_maintext{
+    width: 1000px;
+    height:50px;
+
+}
+.todo_maintext p{
+    text-align: center;
+    font-size: 25px;
+    font-family: Pretendard-ExtraBold;
+    color: hwb(183 21% 45%);
+
+}
+.todo_main_btn{
+    width: 1000px;
+    height:50px;
+    display: flex; /* 버튼을 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+}
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 25px;
+    font-family: Pretendard-regular;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 3px rgba(0, 0, 0, 0.05),
+    4px 4px 10px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btn_register{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+}
+.btn_register:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+
+
+
+.todo_main_table{
+
+    background: azure;
+    display: flex;
+    Justify-content:center;
+    align-items: center;
+
+}
+
+
+.todo_main_box2{
+    background: white;
+    width: 700px;
+
+}
+.todo-table{
+    width: 100%;
+    text-align: left;
+    table-layout: fixed;
+    border-bottom: 1px solid lightblue;
+
+
+}
+.todo-table tr
+
+.todo-table td {
+
+    padding: 10px;
+
+}
+.table_dueDate{
+    padding: 10px;
+    font-family: Pretendard-Bold;
+    font-size: 18px;
+    color: hsl(192, 42%, 24%);
+    text-align: left;
+}
+.table_checkbox{
+    width: 70px;
+    text-align: center;
+}
+
+.table_title{
+    background: #0dcaf0;
+    width: 80%;
+    height: 20px;
+    font-family: Pretendard-Regular;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: hwb(0 39% 61%);
+}
+.table_description{
+    background: #afff9c;
+    width: 80%;
+    height: 30px;
+    font-family: Pretendard-light;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: hsl(0, 0%, 58%);
+}
+.table_icon{
+    background: #d9ffc6;
+    height: 80px;
+    width: 70px;
+}
+.tb_icon{
+
+    float: left;
+    margin: 0px 0px 0px 13px;
+}
