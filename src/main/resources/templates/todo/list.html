@@ -28,8 +28,114 @@
 
   <div class="container2">
     <div class="icon_sidebar">
-      <img src="/img/common/projcect_sidebar_open.png" width="30" height="30">
-    </div>
+      <div class="sidebar">
+        <div class="sidebar-btn">
+          <img class="top-menu" src="/img/common/projcect_sidebar_menu.png" width="40" height="40">
+        </div>
+
+        <div class="sidebar-content">
+
+          <div class="user-info">
+
+            <img  class="user-img" src="/img/common/user_ex.jpg" width="60" height="60">
+
+            <div class="userbox">
+              <div class="username">
+                username님
+              </div>
+
+            </div>
+            <div class="userbox">
+              <div class="user-setting">
+                <a href="">
+                  <img class="topmenu-icon" src="/img/common/projcect_sidebar_setting.png" width="30" height="30">
+                </a>
+              </div>
+            </div>
+
+            <div class="userbox">
+              <div class="user-logout">
+                <a href="">
+                  logout
+                </a>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="sidemenu">
+            <ul class="menu">
+              <li>
+                <a href="#">
+                  <div class="menu-icon" >
+                    <img class="menu-icon" src="/img/common/projcect_sidebar_home.png" width="40" height="40">
+                  </div>
+                  <div class="menu-text">Home</div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="menu-icon" >
+                    <img class="menu-icon" src="/img/common/projcect_sidebar_timer.png" width="40" height="40">
+                  </div>
+                  <div class="menu-text">Timer</div>
+                </a>
+              </li>
+              <li>
+                <a href="/todo/list?pageType=list">
+                  <div class="menu-icon" >
+                    <img class="menu-icon" src="/img/common/projcect_sidebar_todo.png" width="40" height="40">
+                  </div>
+                  <div class="menu-text">Todo List</div>
+                </a>
+
+                <ul class="submenu">
+
+                  <a href="#">
+                    <button type="button" class=" btn_search">
+                      <img class="search_btn" src="/img/common/projcect_sidebar_search.png" width="35" height="35">
+                      <div class="search_btn_text">search</div>
+                    </button>
+                  </a>
+
+                  <li>
+                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
+                    <a href="/todo/list?pageType=today">today</a>
+                  </li>
+                  <li>
+                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
+                    <a href="/todo/list?pageType=upcoming">upcoming</a>
+                  </li>
+                  <li>
+                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
+                    <a href="/todo/list?pageType=past">past</a>
+                  </li>
+                  <li>
+                    <img class="menu-icon2" src="/img/common/projcect_sidebar_smallopen.png" width="20" height="20">
+                    <a href="/todo/list?pageType=completed">completed</a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="menu-icon" >
+                    <img class="menu-icon" src="/img/common/projcect_sidebar_notes.png" width="40" height="40">
+                  </div>
+                  <div class="menu-text">Notes</div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="menu-icon" >
+                    <img class="menu-icon" src="/img/common/projcect_sidebar_community.png" width="40" height="40">
+                  </div>
+                  <div class="menu-text">community</div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
 
     <!--검색 창 -->
@@ -112,13 +218,25 @@
                 <form action="/todo/remove" method="post" style="display:inline;">
                   <input type="hidden" name="todoId" th:value="${dto.todoId}">
                   <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-                  <button type="button" class="deleteIcon" style="background: none; border: none; padding: 0;">
+                  <button type="button" class="deleteIcon"   onclick="confirmDelete(this.form);" style="background: none; border: none; padding: 0;">
                     <img src="/img/todo/bin.png" width="20" height="20" alt="삭제">
                   </button>
                 </form>
               </div>
             </td>
           </tr>
+
+          <div id="confirmPopup" class="popup" style="display: none;" onclick="closePopup(event)">
+            <div class="popup-content" onclick="event.stopPropagation();">
+              <img src="/img/todo/deleteface.png" width="90" height="90">
+              <p>삭제된 항목은 되돌릴 수 없어요. <br><br>괜찮으시다면 확인 버튼을 눌러주세요.</p>
+              <button id="submitDelete" onclick="submitDelete()">확인</button>
+              <button id="cancelDelete" onclick="closePopup()">취소</button>
+            </div>
+          </div>
+
+
+
 
           <!-- Description Row -->
           <tr>
@@ -131,34 +249,45 @@
 
     </div>
 
+    <!--★ [공통] 페이징 th:href 경로 수정★ -->
+
     <div class="float-end">
       <div class="pagination_box">
         <ul class="pagination flex-wrap">
 
           <!-- Previous Button -->
           <li class="page-item" th:if="${responseDTO.prev}">
-            <a class="page-link" th:href="@{/todo/list(page=${responseDTO.start - 1})}">Previous</a>
+            <a class="page-link"
+               th:href="@{/todo/list(page=${responseDTO.start - 1}, pageType=${pageRequestDTO.pageType})}">
+              Previous
+            </a>
           </li>
 
           <!-- Dynamic Page Numbers -->
           <th:block th:each="i : ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
             <li th:classappend="${responseDTO.page == i} ? 'active' : ''" class="page-item">
-              <a class="page-link" th:href="@{/todo/list(page=${i})}" th:text="${i}">1</a>
+              <a class="page-link"
+                 th:href="@{/todo/list(page=${i}, pageType=${pageRequestDTO.pageType})}"
+                 th:text="${i}">1</a>
             </li>
           </th:block>
 
           <!-- Next Button -->
           <li class="page-item" th:if="${responseDTO.next}">
-            <a class="page-link" th:href="@{/todo/list(page=${responseDTO.end + 1})}">Next</a>
+            <a class="page-link"
+               th:href="@{/todo/list(page=${responseDTO.end + 1}, pageType=${pageRequestDTO.pageType})}">
+              Next
+            </a>
           </li>
+
 
         </ul>
       </div>
+
+
     </div>
-
-
   </div>
-
+</div>
 </div>
 
 </body>
@@ -179,14 +308,28 @@
   }, false);
 
 
-  document.querySelector(".deleteIcon").addEventListener("click", function (e){
-    e.preventDefault();
-    e.stopPropagation();
+  var formToDelete;
 
-    formObj.action = `/todo/remove`
-    formObj.method = 'post'
-    formObj.submit()
-  }, false);
+  // 삭제 버튼을 클릭하면 팝업 열기
+  function confirmDelete(form) {
+    formToDelete = form;  // 폼 객체를 전역 변수에 저장
+
+    // 팝업 열기
+    document.getElementById("confirmPopup").style.display = "flex";
+  }
+
+  // 확인 버튼 클릭 시 폼 제출
+  function submitDelete() {
+    if (formToDelete) {
+      formToDelete.submit();  // 폼이 제출되어 삭제 실행
+    }
+    closePopup(); // 팝업 닫기
+  }
+
+  // 팝업 닫기
+  function closePopup() {
+    document.getElementById("confirmPopup").style.display = "none";
+  }
 
 </script>
 
