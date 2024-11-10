@@ -88,9 +88,9 @@
 
               <ul class="submenu">
 
-                <a href="#">
+                <a href="#" onclick="openSearchPopup()">
                   <button type="button" class=" btn_search">
-                    <img class="search_btn" src="/img/common/projcect_sidebar_search.png" width="35" height="35">
+                    <img class="search_btn" src="/img/common/projcect_sidebar_search.png" width="35" height="35" >
                     <div class="search_btn_text">search</div>
                   </button>
                 </a>
@@ -133,11 +133,44 @@
         </div>
       </div>
     </div>
+
+    <!-- 검색 팝업 -->
+    <div id="searchPopup" class="popup2" style="display: none;">
+      <div class="popup-search-content">
+        <img src="/img/common/searchface.png" width="90" height="90">
+        <p>Todo list 검색하기</p>
+        <form action="/todo/list" method="get">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <select class="form-select" name="type">
+                <option value="">-&#45;&#45;</option>
+                <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                <option value="d" th:selected="${pageRequestDTO.type == 'd'}">내용</option>
+                <option value="td" th:selected="${pageRequestDTO.type == 'td'}">제목 내용</option>
+              </select>
+            </div>
+
+            <input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요"
+                   th:value="${pageRequestDTO.keyword}">
+
+            <div class="input-group-append">
+              <button class="popup-search-btn" type="submit">검색</button>
+              <button class="popup-search-btn" type="button" onclick="clearSearch()">초기화</button>
+              <button class="popup-search-btn" onclick="closeSearchPopup()">닫기</button>
+            </div>
+          </div>
+          <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+          <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
+        </form>
+
+      </div>
+    </div>
 </div>
 
 
 
-  <!--★ -----------------------------------------------------------------------------------------------★ -->
+  <!--------------------★★★★★★★★★ 여기서 부터 본인 레이아웃 넣기 ★★★★★★★★★-------------------->
+
 
   <div class="todo_main2">
     <div class="todo_main_box">
@@ -192,6 +225,26 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
-  console.log("script....................")
+  // ★ 공통 스크립트 ( 검색 팝업 ) ★
+  function closePopup() {
+    document.getElementById("confirmPopup").style.display = "none";
+  }
+
+
+  function openSearchPopup() {
+    document.getElementById("searchPopup").style.display = "flex";
+  }
+
+
+  function closeSearchPopup() {
+    document.getElementById("searchPopup").style.display = "none";
+  }
+
+
+  function clearSearch() {
+
+    document.querySelector('input[name="keyword"]').value = '';
+    document.querySelector('select[name="type"]').value = '';
+  }
 </script>
 </html>
