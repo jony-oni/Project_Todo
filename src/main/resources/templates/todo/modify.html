@@ -172,66 +172,66 @@
 
 
 
-  <div class="todo_main2">
-    <div class="todo_main_box">
-      <div class="todo_maintext">
+    <div class="todo_main2">
+      <div class="todo_main_box">
+        <div class="todo_maintext">
         <span th:switch="${pageRequestDTO.pageType}">
           <span>username님 어떤 일을 하셔야 하나요?</span>
         </span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="todo_main_table">
+      <div class="todo_main_box3">
+        <form action="/todo/modify" method="post">
+          <input type="hidden" name="todoId" th:value="${dto.todoId}">
+          <input type="hidden" name="returnTo" th:value="${returnTo != null ? returnTo : 'list'}">
+          <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
+
+
+          <div class="main-input">
+            <label><span>* </span>제목</label>
+            <input type="text" class="txt-input" name="title" th:value="${dto.title}">
+          </div>
+
+          <div class="main-textarea">
+            <label><span>* </span>내용</label>
+            <textarea name="description" class="txt-textarea" rows="3" >[[${dto.description}]]</textarea>
+          </div>
+
+          <div class="main-input">
+            <label><span>* </span>마감날짜</label>
+            <input type="date" class="txt-input" name="dueDate" th:value="${dto.dueDate}" >
+          </div>
+
+          <div class="main-checkbox-txt">
+            <label><span>* </span>완료 여부</label>
+          </div>
+
+          <div class="main_checkbox">
+            <input type="checkbox"  class="txt-input" name="complete" th:checked="${dto.complete?'checked':null}">
+          </div>
+
+
+
+          <div class="todo_main_btn" >
+            <button type="button" id="modifyBtn" class="custom-btn btn_register2">일정 수정</button>
+
+            <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
+              <button type="button" class="custom-btn btn_register2">뒤로</button>
+            </a>
+
+            <button type="button" id="removeBtn" class="custom-btn btn_register3">일정 삭제 </button>
+
+
+
+          </div>
+        </form>
       </div>
     </div>
   </div>
-
-
-  <div class="todo_main_table">
-    <div class="todo_main_box3">
-      <form action="/todo/modify" method="post">
-        <input type="hidden" name="todoId" th:value="${dto.todoId}">
-        <input type="hidden" name="returnTo" th:value="${returnTo != null ? returnTo : 'list'}">
-        <input type="hidden" id="pageType" th:value="${pageRequestDTO.pageType}">
-
-
-        <div class="main-input">
-          <label><span>* </span>제목</label>
-          <input type="text" class="txt-input" name="title" th:value="${dto.title}">
-        </div>
-
-        <div class="main-textarea">
-          <label><span>* </span>내용</label>
-          <textarea name="description" class="txt-textarea" rows="3" >[[${dto.description}]]</textarea>
-        </div>
-
-        <div class="main-input">
-          <label><span>* </span>마감날짜</label>
-          <input type="date" class="txt-input" name="dueDate" th:value="${dto.dueDate}" >
-        </div>
-
-        <div class="main-checkbox-txt">
-          <label><span>* </span>완료 여부</label>
-        </div>
-
-        <div class="main_checkbox">
-          <input type="checkbox"  class="txt-input" name="complete" th:checked="${dto.complete?'checked':null}">
-        </div>
-
-
-
-        <div class="todo_main_btn" >
-          <button type="button" id="modifyBtn" class="custom-btn btn_register2">일정 수정</button>
-
-          <a th:href="|@{/todo/list}?${link}&pageType=${pageRequestDTO.pageType}|" class="text-decoration-none">
-            <button type="button" class="custom-btn btn_register2">뒤로</button>
-          </a>
-
-          <button type="button" id="removeBtn" class="custom-btn btn_register3">일정 삭제 </button>
-
-
-
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 </body>
 <script layout:fragment="script" th:inline="javascript">

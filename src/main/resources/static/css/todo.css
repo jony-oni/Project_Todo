@@ -1,98 +1,33 @@
-@charset "UTF-8";
-
-@font-face {
-    font-family: 'Pretendard-Light;';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-Bold';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Pretendard-ExtraBold';
-    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-/*★ [공통] 상단 logo & Menu  ★ */
-
-.container{
-
-    margin: auto;
-    font-size: 16px;
-    width: 100%;
-
-}
-
-.main_top{
-    height: 80px;
-}
-
-.head_logo{
-    width: 200px;
-    margin: 10px 0px 0px 30px;
-    float: left;
-}
-
-.top_menu{
-    list-style: none;
-
-}
-
-.top_menu li{
-    font-size : 14px;
-    margin-top: 15px;
-    width: 200px;
-    float: left;
-    padding-left: 30px;
-}
-
-.top_menu li > a{
-    text-decoration: none;
-    color: #6c9694;
-    margin-left: 750%;
-    font-family:Pretendard-regular;
-}
-
-/*★ [공통] 상단 좌측 아이콘 ★ */
-
-.icon_sidebar{
-    height: 60px;
-    padding: 0px 0px 0px 30px;
-}
-
-
-
-.container2{
-
-    margin: auto;
-    width: 100%;
-    background-color: #f8f8f8;
-
-}
 /*todo main*/
-.todo_main{
-    height: 140px;
 
+
+.todo_main{
+
+    height: 100px;
     display: flex;
     Justify-content:center;
-    padding-top: 20px;
+    padding-top: 80px;
+    padding-bottom: 10px;
+
+}
+.todo_main2{
+
+    height: 100px;
+    display: flex;
+    Justify-content:center;
+    padding-top: 30px;
+
 }
 
+.todo_main_box{
+    width: 800px;
+    height: 150px;
+}
 
 .todo_maintext{
-    width: 1000px;
+    width: 800px;
     height:50px;
+
 
 }
 .todo_maintext span{
@@ -105,7 +40,7 @@
 
 }
 .todo_main_btn{
-    width: 1000px;
+    width: 800px;
     height:50px;
     display: flex; /* 버튼을 가운데 정렬 */
     justify-content: center; /* 가로 가운데 정렬 */
@@ -131,24 +66,35 @@
     background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
     border: none;
 }
+.btn_register2{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.btn_register3{
+    background: linear-gradient(0deg,  hwb(182 26% 24%) 0%, hwb(175 53% 11%) 100%);
+    border: none;
+    margin-right: 30px;
+    margin-left: 30px;
+}
 .btn_register:hover{
     background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
 }
-
-
-
-
-
-
+.btn_register2:hover{
+    background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
+}
+.btn_register3:hover{
+    background: linear-gradient(0deg, #f49578 0%, rgb(241, 174, 161) 100%);
+}
 
 .todo_main_table {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
     width: 100%;
-
-
 
 }
 
@@ -158,15 +104,23 @@
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0px 4px 8px rgb(218, 230, 230);
+}
 
+.todo_main_box3 {
+    max-width: 800px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
 
 .todo-table {
     width: 100%;
-
+    padding: 10px;
 
 }
-
-
 
 
 .table_dueDate {
@@ -177,26 +131,23 @@
     padding: 10px;
 }
 
-
 .table_title {
-    height: 30px;
+    height: 20px;
     font-family: Pretendard-Bold;
     font-size: 17px;
-
-
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 
 }
- .table_title a {
-     text-decoration: none !important;
-     color: #3a8e97;
- }
+.table_title a {
+    text-decoration: none !important;
+    color: #536c6e;
+}
 
 .table_description {
-    height: 60px;
+    height: 50px;
     font-family: Pretendard-light;
     color: #8b8b8b;
     font-size: 16px;
@@ -207,7 +158,6 @@
     white-space: nowrap;
 
 }
-
 
 .table_checkbox {
 
@@ -221,7 +171,8 @@
     cursor: pointer;
 }
 
-.table_icon img {    cursor: pointer;
+.table_icon img {
+    cursor: pointer;
     transition: opacity 0.2s ease;
 
 }
@@ -236,9 +187,143 @@
     padding-right: 5px;
 }
 
+/* register */
+input{
+    font-family: Pretendard-Regular;
 
+    border: 0;
+    outline: none;
+}
 
+input::placeholder{
+    color: #d9d9d9
 
+}
+textarea::placeholder{
+    color: #d9d9d9;
+    font-family: Pretendard-Regular;
+}
+.main-input{
+    width: 80%;
+    box-sizeing: border-box;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    font-family: Pretendard-Regular;
+}
 
+.main-textarea{
+    width: 80%;
+    box-sizeing: border-box;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    font-family: Pretendard-Bold;
 
+}
+.main-checkbox-txt{
+    width: 80%;
+    box-sizeing: border-box;
+    position: relative;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    font-family: Pretendard-Bold;
+
+}
+
+.main-input label{
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-textarea label{
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-checkbox-txt label{
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    padding: 10px;
+    background: white;
+    font-size: 14px;
+    color: #888;
+    font-weight: bold;
+}
+.main-input.ver2 label{
+    top: initial;
+    bottom: -20px;
+}
+.main-textarea.ver2 label{
+    top: initial;
+    bottom: -20px;
+}
+.main-checkbox-txtlabel{
+    top: initial;
+    bottom: -20px;
+}
+.main-input label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-textarea label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-checkbox-txt label span{
+    color: #da4841;
+    vertical-align: -1px;
+}
+.main-input input{
+    width: 600px;
+    border: 1px solid #dddddd !important;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    line-height: 1.45;
+    letter-spacing: -0.04rem;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+}
+
+.txt-textarea{
+    width: 600px;
+    height: 180px;
+    font-size: 16px;
+    padding: 16px;
+    margin-top: 12px;
+    border-radius: 8px;
+    border: 1px solid #dddddd !important;
+    box-shadow: 0px 4px 8px rgb(218, 230, 230);
+    background-color: #fff;
+    outline: none;
+    font-size: 14px;
+    color: #484848;
+    font-family: Pretendard-Regular;
+}
+.main_checkbox{
+    float: left;
+    margin-left: 180px;
+    margin-bottom: 20px;
+
+}
 
