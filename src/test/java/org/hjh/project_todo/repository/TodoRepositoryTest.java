@@ -20,7 +20,7 @@ public class TodoRepositoryTest {
     private TodoRepository todoRepository;
     @Test
     public void testInsert() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+        IntStream.rangeClosed(1, 50).forEach(i -> {
             Todo todo = Todo.builder()
                     .title("Title" + i)
                     .memberId("sample member")

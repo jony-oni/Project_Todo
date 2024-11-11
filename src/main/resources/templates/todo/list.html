@@ -23,12 +23,12 @@
       </ul>
     </div>
   </div>
-  <div class="icon_sidebar">
-    <img src="/img/projcect_sidebar_open.png" width="30" height="30">
-  </div>
+
 
   <div class="container2">
-
+    <div class="icon_sidebar">
+      <img src="/img/projcect_sidebar_open.png" width="30" height="30">
+    </div>
 
     <!--검색 창 -->
 
@@ -80,15 +80,15 @@
 
     <div class="todo_main_table">
       <div class="todo_main_box2">
-        <table class="todo-table">
+        <table class="todo-table" th:each="dto : ${responseDTO.dtoList}">
           <tbody th:with="link=${pageRequestDTO.getLink()}">
           <!-- Due Date Row -->
           <tr>
-            <td class="table_dueDate" colspan="4" th:text="${#temporals.format(firstDueDate, 'yyyy-MM-dd')}"></td>
+            <td class="table_dueDate" colspan="4" >[[${#temporals.format(dto.dueDate,'yyyy-MM-dd')}]]</td>
           </tr>
 
           <!-- Todo Item Rows -->
-          <tr th:each="dto : ${responseDTO.dtoList}">
+          <tr >
             <!-- Checkbox Column -->
             <td class="table_checkbox" rowspan="2"  style="width: 10%; height: 40px;" >
               <input class="form-check-input" type="checkbox" th:checked="${dto.complete ?: false ? 'checked' : ''}">
@@ -110,7 +110,7 @@
                 <form action="/todo/remove" method="post" style="display:inline;">
                   <input type="hidden" name="todoId" th:value="${dto.todoId}">
                   <input type="hidden" name="pageType" th:value="${pageRequestDTO.pageType}">
-                  <button type="submit" style="background: none; border: none; padding: 0;">
+                  <button type="button" style="background: none; border: none; padding: 0;">
                     <img src="../img/bin.png" width="20" height="20" alt="삭제" onclick="return confirmDelete(this)">
                   </button>
                 </form>
@@ -119,7 +119,7 @@
           </tr>
 
           <!-- Description Row -->
-          <tr th:each="dto : ${responseDTO.dtoList}">
+          <tr>
             <td class="table_description" colspan="2" style="width: 80%"  th:text="${dto.description}"></td>
           </tr>
           </tbody>
@@ -127,11 +127,30 @@
 
       </div>
 
+
+
     </div>
 
+    <!--<div class="main_pagination">
+      <div class="pagination_box">
+        <ul class="pagination flex-wrap">
+          <li class="page-item" th:if="${responseDTO.prev}">
+            <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+          </li>
+          <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+            <li th:class="${responseDTO.page == i}?'page-item active':'page-item'" >
+              <a class="page-link"  th:data-num="${i}">[[${i}]]</a>
+            </li>
+          </th:block>
+          <li class="page-item" th:if="${responseDTO.next}">
+            <a class="page-link"  th:data-num="${responseDTO.end + 1}">Next</a>
+          </li>
+        </ul>
+      </div>
+    </div>-->
 
-    <div class="float-end">
-      <ul class="pagination flex-wrap">
+    <div class="main_pagination">
+      <ul class="pagination_box">
         <li class="page-item" th:if="${responseDTO.prev}">
           <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
         </li>
@@ -147,6 +166,7 @@
       </ul>
     </div>
 
+
   </div>
 
 </div>
@@ -155,7 +175,9 @@
 
 
 <script layout:fragment="script" th:inline="javascript">
-  document.querySelector(".pagination").addEventListener("click", function (e){
+
+
+  document.querySelector(".main_pagination").addEventListener("click", function (e){
     e.preventDefault()
     e.stopPropagation()
     const target=e.target

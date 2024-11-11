@@ -28,7 +28,7 @@ public class TodoController {
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO,Model model) {
-        log.info("controller list");
+        log.info("controller list"+pageRequestDTO);
         //model.addAttribute("todoList", todoService.getList());
 //        log.info("pageType=" + pageRequestDTO.getPageType());
 
@@ -36,11 +36,11 @@ public class TodoController {
         log.info(responseDTO);
         model.addAttribute("responseDTO", responseDTO);
         // responseDTO.getDtoList()에서 첫 번째 TodoDTO의 dueDate만 가져오기
-        LocalDate firstDueDate = responseDTO.getDtoList().isEmpty() ? LocalDate.now() : responseDTO.getDtoList().get(0).getDueDate();
+        /*LocalDate firstDueDate = responseDTO.getDtoList().isEmpty() ? LocalDate.now() : responseDTO.getDtoList().get(0).getDueDate();
         model.addAttribute("firstDueDate", firstDueDate);
 
         String description = responseDTO.getDtoList().isEmpty() ? "sample description" : responseDTO.getDtoList().get(0).getDescription();
-        model.addAttribute("description", description);
+        model.addAttribute("description", description);*/
 
     }
 
