@@ -26,82 +26,73 @@
 }
 /*★ [공통] 상단 logo & Menu  ★ */
 
-.container {
+.container{
+
     margin: auto;
     font-size: 16px;
     width: 100%;
 
 }
 
-.main_top {
+.main_top{
     height: 80px;
-    position: relative;
 }
 
-.head_logo {
+.head_logo{
     width: 200px;
     margin: 10px 0px 0px 30px;
     float: left;
 }
 
-.top_menu {
+.top_menu{
     list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 30px;
-    top: 25px;
-}
-
-.top_menu li {
-    font-size: 14px;
-    margin-left: 20px;
-    display: inline-block;
 
 }
 
-.top_menu li > a {
+.top_menu li{
+    font-size : 14px;
+    margin-top: 15px;
+    width: 200px;
+    float: left;
+    padding-left: 30px;
+}
+
+.top_menu li > a{
     text-decoration: none;
     color: #6c9694;
-    font-family: Pretendard-regular;
-    padding-left: 150px;
+    margin-left: 750%;
+    font-family:Pretendard-regular;
 }
 
-/* 공통 좌측 아이콘 스타일 */
-.icon_sidebar {
-    width: 100%;
+/*★ [공통] 상단 좌측 아이콘 ★ */
+
+.icon_sidebar{
     height: 60px;
-
-    padding: 20px 0px 0px 30px;
-
+    padding: 0px 0px 0px 30px;
 }
+
 
 
 .container2{
 
     margin: auto;
     width: 100%;
-    height: 910px;
     background-color: #f8f8f8;
 
 }
 /*todo main*/
 .todo_main{
-    height: 120px;
+    height: 140px;
+
     display: flex;
     Justify-content:center;
-    padding-top: 5px;
+    padding-top: 20px;
 }
 
-.todo_main_box{
-    width: 800px;
-    height: 150px;
-}
 
 .todo_maintext{
-    width: 800px;
+    width: 1000px;
     height:50px;
-
 
 }
 .todo_maintext span{
@@ -114,7 +105,7 @@
 
 }
 .todo_main_btn{
-    width: 800px;
+    width: 1000px;
     height:50px;
     display: flex; /* 버튼을 가운데 정렬 */
     justify-content: center; /* 가로 가운데 정렬 */
@@ -144,12 +135,20 @@
     background: linear-gradient(0deg,  #469db3 0%, rgb(110, 189, 199) 100%);
 }
 
+
+
+
+
+
+
 .todo_main_table {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 10px;
+    padding: 20px;
     width: 100%;
+
+
 
 }
 
@@ -159,13 +158,15 @@
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0px 4px 8px rgb(218, 230, 230);
-}
+
 
 .todo-table {
     width: 100%;
-    padding: 10px;
+
 
 }
+
+
 
 
 .table_dueDate {
@@ -176,10 +177,13 @@
     padding: 10px;
 }
 
+
 .table_title {
-    height: 20px;
+    height: 30px;
     font-family: Pretendard-Bold;
     font-size: 17px;
+
+
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -188,11 +192,11 @@
 }
  .table_title a {
      text-decoration: none !important;
-     color: #536c6e;
+     color: #3a8e97;
  }
 
 .table_description {
-    height: 50px;
+    height: 60px;
     font-family: Pretendard-light;
     color: #8b8b8b;
     font-size: 16px;
@@ -203,6 +207,7 @@
     white-space: nowrap;
 
 }
+
 
 .table_checkbox {
 
@@ -216,8 +221,7 @@
     cursor: pointer;
 }
 
-.table_icon img {
-    cursor: pointer;
+.table_icon img {    cursor: pointer;
     transition: opacity 0.2s ease;
 
 }
@@ -232,68 +236,6 @@
     padding-right: 5px;
 }
 
-
-/* ★ [공통] 페이지네이션 스타일  ★*/
-
-.main_pagination {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.pagination_box {
-    display: flex;
-    justify-content: center; /* 중앙 정렬 */
-    align-items: center;
-}
-
-.pagination {
-    display: flex;
-    gap: 5px;
-    padding: 0;
-}
-
-.pagination .page-item {
-    list-style: none;
-}
-
-.pagination .page-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-    color: #3a8e97;
-    text-decoration: none;
-    border-radius: 50px;
-    transition: all 0.3s;
-    box-shadow:
-     inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 3px rgba(0, 0, 0, 0.05);
-}
-
-.pagination .page-link:hover,
-.pagination .page-item.active .page-link {
-    background: linear-gradient(0deg, #5bcaca 0%, rgb(136, 221, 232) 100%);
-    border-radius: 50px;
-    color: #fff;
-}
-
-.pagination .page-item.active .page-link {
-    font-weight: bold;
-}
-
-.page-item:first-child .page-link,
-.page-item:last-child .page-link {
-    width: auto;
-    padding: 0 12px;
-    border-radius: 5px;
-}
-
-.pagination .page-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(44, 62, 80, 0.2);
-}
 
 
 
